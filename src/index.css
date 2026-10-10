@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg:          #F7F8FA;
+  --color-card:        #FFFFFF;
+  --color-ink:         #0D1017;
+  --color-ink-2:       #333A45;
+  --color-muted:       #596273;
+  --color-line:        #E6E8EE;
+  --color-line-strong: #D2D6E0;
+  --color-field:       #7F8798;
+
+  --color-brand:       #3B2FD9;
+  --color-brand-soft:  #EDEBFB;
+  --color-pos:         #0B7A4B;
+  --color-pos-soft:    #E4F3EB;
+  --color-neg:         #BF2718;
+  --color-neg-soft:    #FBEAE7;
+  --color-warn:        #8A5A08;
+  --color-warn-soft:   #FBF1DC;
+  --color-sand:        #8A5A2B;
+  --color-sand-soft:   #F6EFE6;
+  --color-dark:        #10131A;
+
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+  ::selection { background: var(--color-brand); color: #fff; }
+  /* Figures must line up in columns, everywhere, always. */
+  table, .num { font-variant-numeric: tabular-nums; }
+}
+
+@layer components {
+  .shell { width: 100%; max-width: 80rem; margin-inline: auto; padding-inline: 1rem; }
+  @media (min-width: 768px) { .shell { padding-inline: 1.75rem; } }
+
+  .card { background: var(--color-card); border: 1px solid var(--color-line); border-radius: 0.75rem; }
+
+  /* Metric figures are monospaced so a column of money reads as a column. */
+  .fig { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+
+  .label {
+    font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--color-muted);
+  }
+
+  .h1 { font-size: clamp(1.75rem, 3.6vw, 2.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; }
+  .h2 { font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+  .h3 { font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+  }
+}
