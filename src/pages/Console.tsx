@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { AlertTriangle, ArrowRight } from 'lucide-react'
 import { Stat, Badge, SectionHead, ButtonLink } from '../components/ui'
 import { RevenueChart } from '../components/Chart'
-import { ProductArt } from '../components/ProductArt'
+import { ProductImage } from '../components/ProductImage'
 import { bySlug, campaigns, gbp, gbp0, pct, products } from '../lib/catalogue'
 import { campaignsFor, modelOf, netProfitP, perfOf, profitPerOrderP, unitEconomics } from '../lib/economics'
 import { daily } from '../lib/series'
@@ -106,7 +106,7 @@ export default function Console() {
                   <tr key={r.p.slug} className="hover:bg-bg">
                     <th scope="row" className="px-4 py-3 text-left font-normal">
                       <Link to={`/console/products?p=${r.p.slug}`} className="flex items-center gap-3 hover:text-brand">
-                        <ProductArt art={r.p.art} name={r.p.name} className="size-9 shrink-0 rounded-md" />
+                        <ProductImage product={r.p} size="thumb" className="size-9 shrink-0 rounded-md" />
                         <span className="font-semibold">{r.p.name}</span>
                       </Link>
                     </th>

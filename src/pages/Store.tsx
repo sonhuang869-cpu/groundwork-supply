@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Star, ArrowRight } from 'lucide-react'
-import { ProductArt } from '../components/ProductArt'
+import { ProductImage, Scene } from '../components/ProductImage'
 import { ButtonLink, Badge } from '../components/ui'
 import { bySlug, gbp, live, products } from '../lib/catalogue'
 import { campaignsFor, perfOf } from '../lib/economics'
@@ -29,7 +29,7 @@ export function ProductCard({ slug }: { slug: string }) {
     <li className="group">
       <Link to={`/p/${p.slug}`} className="block">
         <div className="relative">
-          <ProductArt art={p.art} name={p.name} className="w-full rounded-xl transition-transform duration-200 group-hover:-translate-y-0.5" />
+          <ProductImage product={p} size="card" className="aspect-square w-full rounded-xl transition-transform duration-200 group-hover:-translate-y-0.5" />
           {off > 0 && <span className="absolute left-3 top-3"><Badge tone="neg">{off}% off</Badge></span>}
         </div>
         <div className="mt-3">
@@ -47,7 +47,7 @@ export function ProductCard({ slug }: { slug: string }) {
 }
 
 export default function Store() {
-  const hero = bySlug('percussion-massager')!
+  const hero = bySlug('studio-yoga-mat')!
   const perf = perfOf(campaignsFor(hero.slug), priceOf)
   // Four across, so the row fills. The fifth lives in the nav and the footer.
   const sellers = [...live()]
@@ -61,14 +61,14 @@ export default function Store() {
           <div>
             <Badge tone="brand">Best seller · {perf.orders} sold this month</Badge>
             <h1 className="h1 mt-4">
-              Recover harder than<br className="hidden sm:block" /> you train.
+              Kit that outlasts<br className="hidden sm:block" /> the January intake.
             </h1>
             <p className="mt-4 max-w-lg text-base text-ink-2">
-              Percussion, compression and mobility kit that does the job of a sports massage, in a flat,
-              at ten at night. Shipped from Salford in two to four days.
+              Mats, bells and bands for training at home, chosen because they survive being used five
+              times a week rather than photographed once. Shipped from Salford in two to four days.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <ButtonLink to={`/p/${hero.slug}`} tone="ink">Shop the massager</ButtonLink>
+              <ButtonLink to={`/p/${hero.slug}`} tone="ink">Shop the Studio Mat</ButtonLink>
               <ButtonLink to={`/lp/${hero.slug}`} tone="outline">See the landing page</ButtonLink>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
@@ -78,7 +78,7 @@ export default function Store() {
           </div>
 
           <div className="relative">
-            <ProductArt art={hero.art} name={hero.name} className="w-full rounded-2xl" />
+            <ProductImage product={hero} size="full" priority className="aspect-square w-full rounded-2xl" />
             <div className="card absolute -bottom-4 left-4 right-4 flex items-center justify-between gap-4 p-3.5 md:left-auto md:right-6 md:w-64">
               <div>
                 <p className="label">This month</p>
@@ -107,6 +107,26 @@ export default function Store() {
         <ul className="mt-7 grid grid-cols-2 gap-x-5 gap-y-9 lg:grid-cols-4">
           {sellers.map(p => <ProductCard key={p.slug} slug={p.slug} />)}
         </ul>
+      </section>
+
+      <section aria-label="Inside the Salford unit" className="border-t border-line">
+        <div className="relative">
+          <Scene
+            name="hero-rack"
+            priority
+            alt="A wall rack in the Groundwork unit holding slam balls, resistance rings, bars and dumbbells in rows."
+            className="h-[22rem] w-full md:h-[30rem]"
+          />
+          <div className="absolute inset-0 flex items-end">
+            <div className="shell pb-6 md:pb-10">
+              {/* Solid panel rather than a gradient: white on a photograph is a
+                  guess, and this photograph is pale wood. */}
+              <p className="max-w-md rounded-xl bg-dark px-5 py-4 text-base font-semibold text-white md:text-xl">
+                Everything is held in Salford, picked by us, and out the door the next working day.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section aria-labelledby="testing" className="border-t border-line bg-bg">

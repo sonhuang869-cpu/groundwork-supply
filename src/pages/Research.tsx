@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { RotateCcw } from 'lucide-react'
 import { Badge, Button, SectionHead } from '../components/ui'
-import { ProductArt } from '../components/ProductArt'
+import { ProductImage } from '../components/ProductImage'
 import { bySlug, gbp, pct, products } from '../lib/catalogue'
 import { campaignsFor, modelOf, perfOf, unitEconomics, type Model } from '../lib/economics'
 
@@ -156,7 +156,7 @@ export default function Research() {
                   aria-pressed={on}
                   className={`flex w-36 flex-col items-start gap-2 rounded-lg border p-2.5 text-left transition-colors duration-150 ${
                     on ? 'border-brand bg-brand-soft' : 'border-line hover:border-field'}`}>
-                  <ProductArt art={p.art} name={p.name} className="size-10 rounded-md" />
+                  <ProductImage product={p} size="thumb" className="size-10 rounded-md" />
                   <span className="text-xs font-semibold leading-tight">{p.name}</span>
                   <span className="fig text-xs text-muted">{unitEconomics(modelOf(p)).breakEvenRoas.toFixed(2)}x to break even</span>
                 </button>

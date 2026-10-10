@@ -18,13 +18,15 @@ What that looks like in the campaign table:
 
 | Campaign | ROAS | Break-even | Profit / order |
 |---|---|---|---|
-| Massager · Spark Ads | 2.58x | 1.69x | **£16.15** |
-| Boots · Broad | 2.28x | 2.10x | **£7.39** |
-| Kettlebell · Broad | 2.60x | 2.99x | **−£2.42** |
+| Studio Mat · Spark Ads | 2.58x | 1.69x | **£16.15** |
+| Dumbbell · Broad | 2.28x | 2.10x | **£7.39** |
+| Kettlebell · Broad | 2.60x | 2.99x | **-£2.42** |
 
 The kettlebell has the *highest* ROAS of the three and is the only one losing
-money. It clears the usual "keep anything above 2x" rule and still costs £220.60
-over the month. Turning that one campaign off lifts net profit with no new spend.
+money. A 16 kg lump of cast iron costs £8.90 to ship, which is what eats the
+margin. It clears the usual "keep anything above 2x" rule and still costs
+£220.60 over the month. Turning that one campaign off lifts net profit with no
+new spend.
 
 Blended across the account it reads 3.14x, which looks healthy and hides this
 entirely.
@@ -66,10 +68,22 @@ pence throughout and nothing is stored twice: campaign revenue is derived from
 orders times price, and the daily chart is apportioned from the campaign totals
 by largest remainder, so the chart, the tables and the store cannot disagree.
 
-## Design notes
+## Photography
 
-No stock photography. The eight products are drawn as vector silhouettes sharing
-one ground, one stroke weight and one palette, so the grid reads as one brand.
+Real product photography, sourced from Unsplash, whose licence permits
+commercial use without permission or attribution. Every image was inspected
+before selection, then resized and converted to WebP and committed to
+`public/shop`, so the store serves its own assets and there is no third party in
+the critical path. The whole set is 1.8 MB across 43 files.
+
+Each product has a main shot plus two detail views, generated as subject
+anchored zoom crops of the same photograph rather than position crops, because a
+top or bottom crop can leave the product out of frame entirely.
+
+Images declare `width` and `height` so nothing reflows while they load, carry
+`srcset` at 200, 600 and 1000 px, and fall back to a sized, labelled box if a
+file is ever missing.
+
 Figures are set in a monospace with tabular numerals so a column of money lines
 up.
 
@@ -83,8 +97,14 @@ rather than asserted-to-be-true in prose.
 A headless sweep then loads nine routes at 390 px and 1440 px and asserts no
 horizontal overflow, no console errors, no unlabelled or collapsed artwork, and
 contrast measured against each element's composited background. On top of that it
-exercises variants, the bundle, the basket across a refresh, the platform filter,
-sorting, the live economics model, the reset, the landing page structure, the 404
-and the first tab stop.
+exercises variants, the gallery, the bundle, the basket across a refresh, the
+platform filter, sorting, the live economics model, the reset, the landing page
+structure, the 404 and the first tab stop.
 
-Prototype. Representative brand, products, prices and figures.
+Images are checked by decoding them, not by looking at the layout: a broken
+`<img>` still occupies its box. The sweep asserts every photograph decodes, has
+alt text, reserves its space, and is not being squashed out of its own aspect
+ratio.
+
+Prototype. Representative brand, products, prices and figures. Photography
+from Unsplash under the Unsplash licence.

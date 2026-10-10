@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link, useParams, Navigate } from 'react-router-dom'
 import { Star, Check, Truck, RotateCcw, Minus, Plus, Package } from 'lucide-react'
-import { ProductArt } from '../components/ProductArt'
+import { ProductImage } from '../components/ProductImage'
 import { ProductCard } from './Store'
 import { Button, Badge } from '../components/ui'
 import { useCart } from '../lib/cart'
@@ -10,12 +10,19 @@ import { bySlug, gbp, live } from '../lib/catalogue'
 /** The cross-sell is a real bundle with a real saving, not a decorative row. */
 const BUNDLE_OFF = 0.12
 
+const VIEWS: { key: 'b' | 'c' | undefined; label: string }[] = [
+  { key: undefined, label: 'the full product' },
+  { key: 'b', label: 'a closer view' },
+  { key: 'c', label: 'the detail' },
+]
+
 export default function ProductPage() {
   const { slug } = useParams()
   const p = slug ? bySlug(slug) : undefined
   const { add } = useCart()
 
   const [colour, setColour] = useState(p?.colours[0] ?? '')
+  const [view, setView] = useState<'b' | 'c' | undefined>(undefined)
   const [qty, setQty] = useState(1)
   const [withBundle, setWithBundle] = useState(false)
   const [added, setAdded] = useState(false)
@@ -54,11 +61,32 @@ export default function ProductPage() {
 
       <div className="shell grid gap-10 py-8 lg:grid-cols-[1.05fr_26rem] lg:gap-14 lg:py-12">
         <div>
-          <ProductArt art={p.art} name={p.name} className="w-full rounded-2xl" />
-          <ul className="mt-4 grid grid-cols-4 gap-3">
-            {[0, 1, 2, 3].map(i => (
-              <li key={i} className="rounded-lg border border-line p-1">
-                <ProductArt art={p.art} name={`${p.name}, view ${i + 1}`} className="w-full rounded-md" />
+          <ProductImage
+            product={p}
+            size="full"
+            priority
+            variant={view}
+            className="aspect-square w-full rounded-2xl"
+          />
+          <ul className="mt-4 grid grid-cols-3 gap-3">
+            {VIEWS.map(v => (
+              <li key={v.key ?? 'main'}>
+                <button
+                  type="button"
+                  onClick={() => setView(v.key)}
+                  aria-pressed={view === v.key}
+                  className={`block w-full rounded-lg border p-1 transition-colors duration-150 ${
+                    view === v.key ? 'border-brand' : 'border-line hover:border-field'}`}
+                >
+                  <ProductImage
+                    product={p}
+                    size="thumb"
+                    variant={v.key}
+                    alt={`${p.name}, ${v.label}`}
+                    className="aspect-square w-full rounded-md"
+                  />
+                  <span className="sr-only">Show {v.label}</span>
+                </button>
               </li>
             ))}
           </ul>
@@ -151,7 +179,7 @@ export default function ProductPage() {
                     {gbp(bundleP)} <span className="text-muted line-through">{gbp(bundleFullP)}</span>
                   </span>
                 </span>
-                <ProductArt art={partner.art} name={partner.name} className="size-14 shrink-0 rounded-lg" />
+                <ProductImage product={partner} size="thumb" className="size-14 shrink-0 rounded-lg" />
               </label>
             </div>
           )}

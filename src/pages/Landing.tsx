@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { Star, Check, ShieldCheck, Truck, Minus, Plus, Lock } from 'lucide-react'
-import { ProductArt } from '../components/ProductArt'
+import { ProductImage } from '../components/ProductImage'
 import { Button, Badge } from '../components/ui'
 import { useCart } from '../lib/cart'
 import { bySlug, gbp } from '../lib/catalogue'
@@ -12,9 +12,9 @@ import { bySlug, gbp } from '../lib/catalogue'
  */
 
 const PROBLEMS = [
-  'A sports massage is £55 and you need one every fortnight',
-  'The foam roller cannot reach between your shoulder blades',
-  'By the time the ache sets in you are already two sessions behind',
+  'Your hands slide forward in downward dog about four minutes in',
+  'The cheap mat has gone shiny in two patches and will not grip at all',
+  'You have started putting a towel over it, which slides as well',
 ]
 
 const REASSURANCE = [
@@ -24,8 +24,9 @@ const REASSURANCE = [
 ]
 
 const FAQ = [
-  { q: 'Is it loud?', a: 'It runs at about 45 decibels on speed three, which is quieter than a dishwasher. You can use it on the sofa with the television on.' },
-  { q: 'How long does the battery last?', a: 'Two hours of continuous use, which in practice is two to three weeks. It charges over USB-C in ninety minutes.' },
+  { q: 'Does it actually grip when I sweat?', a: 'That is the whole point of the closed cell rubber face. Sweat sits on top rather than soaking in, and the grip gets slightly better when damp rather than worse. It is the opposite of a PVC mat.' },
+  { q: 'Will it smell of rubber?', a: 'For about three days, yes. Natural rubber does. Leave it unrolled somewhere ventilated and it goes. If it bothers you after a fortnight, send it back.' },
+  { q: 'Is 5 mm enough for my knees?', a: 'For most people, on a wooden floor, yes. If you kneel a lot or have sore knees, fold the end over or add a block under the knee rather than buying a thicker mat that then slides.' },
   { q: 'What if it is not for me?', a: 'Send it back within thirty days, unused and in the box, and we refund the order including the delivery you paid.' },
   { q: 'How quickly does it arrive?', a: 'Dispatched the next working day from Salford, with delivery in two to four days across UK mainland.' },
 ]
@@ -75,7 +76,7 @@ export default function Landing() {
             <Badge tone="pos">Free UK delivery</Badge>
           </div>
           <h1 className="h1 mt-4">
-            The £55 sports massage,<br className="hidden sm:block" /> for the price of one.
+            The mat that grips<br className="hidden sm:block" /> harder when you sweat.
           </h1>
           <p className="mt-4 text-base text-ink-2">{p.short} {p.bullets[0]}.</p>
 
@@ -117,14 +118,14 @@ export default function Landing() {
         </div>
 
         <div className="order-1 lg:order-2">
-          <ProductArt art={p.art} name={p.name} className="w-full rounded-2xl" />
+          <ProductImage product={p} size="full" priority className="aspect-square w-full rounded-2xl" />
         </div>
       </section>
 
       {/* Problem */}
       <section aria-labelledby="problem" className="border-y border-line bg-bg">
         <div className="shell py-12 md:py-14">
-          <h2 id="problem" className="h2 max-w-lg">If you train four times a week, you already know the problem.</h2>
+          <h2 id="problem" className="h2 max-w-lg">If you practise more than twice a week, you already know the problem.</h2>
           <ul className="mt-7 grid gap-5 md:grid-cols-3">
             {PROBLEMS.map((t, i) => (
               <li key={t} className="card p-5">
@@ -139,7 +140,7 @@ export default function Landing() {
       {/* What it does */}
       <section aria-labelledby="does" className="shell py-12 md:py-14">
         <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
-          <ProductArt art={p.art} name={`${p.name} in use`} className="w-full rounded-2xl" />
+          <ProductImage product={p} size="full" variant="b" alt={`${p.name}, close up`} className="aspect-square w-full rounded-2xl" />
           <div>
             <h2 id="does" className="h2">What you actually get</h2>
             <ul className="mt-5 space-y-3">
@@ -161,9 +162,9 @@ export default function Landing() {
           <h2 id="proof" className="h2">What buyers say</h2>
           <ul className="mt-7 grid gap-5 md:grid-cols-3">
             {[
-              { w: 'I bought it expecting to use it twice and shelve it. It lives on the coffee table and my calves have stopped seizing up on long runs.', n: 'Aisha K.', c: 'Verified buyer' },
-              { w: 'Quieter than I expected, which matters in a flat with thin walls. The deep tissue head is almost too much on speed six.', n: 'Tom R.', c: 'Verified buyer' },
-              { w: 'Cheaper than three sports massages and I have had it eight months. The battery still lasts a fortnight.', n: 'Marc D.', c: 'Verified buyer' },
+              { w: 'Third mat in two years and the first one I have not had to put a towel on. It is heavier than I expected, which turns out to be the point.', n: 'Aisha K.', c: 'Verified buyer' },
+              { w: 'It did smell for the first few days exactly as the page said it would. Then it stopped. I appreciated being told rather than finding out.', n: 'Tom R.', c: 'Verified buyer' },
+              { w: 'I teach four classes a week on it. Eight months in, no shiny patches where my hands go, which is where every other mat has died.', n: 'Marc D.', c: 'Verified buyer' },
             ].map(t => (
               <li key={t.n} className="card p-5">
                 <span className="flex" aria-hidden="true">

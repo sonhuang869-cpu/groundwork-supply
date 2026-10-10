@@ -1,0 +1,27 @@
+Photography in this prototype comes from Unsplash.
+
+The Unsplash licence grants a free, irrevocable, worldwide, non-exclusive right
+to download, copy, modify, distribute and use the photographs, including for
+commercial purposes, with no permission or attribution required.
+https://unsplash.com/license
+
+Each file below was inspected before selection, then resized and converted to
+WebP. Attribution is not required; it is recorded here so the source of every
+asset is traceable.
+
+product                 unsplash photo id
+----------------------  ----------------------------------------
+studio-yoga-mat         photo-1763004871583-4183d64096b1
+adjustable-dumbbell     photo-1784894645353-81486c66a687
+resistance-band-set     photo-1515775538093-d2d95c5ee4f5
+cast-kettlebell         photo-1754839004013-0276d56bc0e7
+insulated-bottle        photo-1625708458528-802ec79b1ed8
+sleep-mask              photo-1687435703153-88f6bc0cdcff
+weighted-jump-rope      photo-1516876345887-6dd74f80787a
+cork-yoga-blocks        photo-1646239646963-b0b9be56d6b5
+hero-rack               photo-1771270786606-f5a0e57db762
+hero-room               photo-1786204413545-cc7f6d87a112
+lifestyle-mats          photo-1767605545968-a102fc151b08
+
+The -b and -c files are subject-anchored zoom crops of the same photograph,
+generated with sharp. The -200 and -600 files are resized copies for srcset.

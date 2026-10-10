@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { ShoppingBag, Menu, X, Truck, RotateCcw, ShieldCheck, Minus, Plus, Trash2, Gauge } from 'lucide-react'
 import { useCart, FREE_SHIP_P, SHIP_P } from '../lib/cart'
 import { bySlug, gbp, live } from '../lib/catalogue'
-import { ProductArt } from './ProductArt'
+import { ProductImage } from './ProductImage'
 import { Button, ButtonLink } from './ui'
 
 function Logo({ dark }: { dark?: boolean }) {
@@ -67,7 +67,7 @@ function CartDrawer() {
                 const p = bySlug(l.slug)!
                 return (
                   <li key={`${l.slug}-${l.colour}`} className="flex gap-3.5 py-4">
-                    <ProductArt art={p.art} name={p.name} className="size-16 shrink-0 rounded-lg" />
+                    <ProductImage product={p} size="thumb" className="size-16 shrink-0 rounded-lg" />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
@@ -157,7 +157,7 @@ export function StoreLayout({ children }: { children: React.ReactNode }) {
               {live().slice(0, 4).map(p => (
                 <NavLink key={p.slug} to={`/p/${p.slug}`}
                   className={({ isActive }) => `text-sm font-medium ${isActive ? 'text-brand' : 'text-ink-2 hover:text-ink'}`}>
-                  {p.name.replace('Compression ', '').replace('Cast ', '')}
+                  {p.name.split(',')[0]}
                 </NavLink>
               ))}
             </nav>
@@ -239,7 +239,7 @@ export function StoreLayout({ children }: { children: React.ReactNode }) {
               <li><Link to="/console" className="text-line-strong hover:text-white">Operator console</Link></li>
               <li><Link to="/console/campaigns" className="text-line-strong hover:text-white">Campaigns</Link></li>
               <li><Link to="/console/products" className="text-line-strong hover:text-white">Unit economics</Link></li>
-              <li><Link to="/lp/percussion-massager" className="text-line-strong hover:text-white">Example landing page</Link></li>
+              <li><Link to="/lp/studio-yoga-mat" className="text-line-strong hover:text-white">Example landing page</Link></li>
             </ul>
           </nav>
         </div>
