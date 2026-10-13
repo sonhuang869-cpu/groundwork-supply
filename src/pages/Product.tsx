@@ -6,6 +6,7 @@ import { ProductCard } from './Store'
 import { Button, Badge } from '../components/ui'
 import { useCart } from '../lib/cart'
 import { bySlug, gbp, live } from '../lib/catalogue'
+import { movedTo } from '../lib/moved'
 
 /** The cross-sell is a real bundle with a real saving, not a decorative row. */
 const BUNDLE_OFF = 0.12
@@ -32,6 +33,9 @@ export default function ProductPage() {
     [p],
   )
 
+  // A link sent before the rename still has to work.
+  const moved = movedTo(slug)
+  if (!p && moved) return <Navigate to={`/p/${moved}`} replace />
   if (!p) return <Navigate to="/404" replace />
 
   const off = p.compareAtP ? Math.round((1 - p.priceP / p.compareAtP) * 100) : 0

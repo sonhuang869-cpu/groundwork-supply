@@ -5,6 +5,7 @@ import { ProductImage } from '../components/ProductImage'
 import { Button, Badge } from '../components/ui'
 import { useCart } from '../lib/cart'
 import { bySlug, gbp } from '../lib/catalogue'
+import { movedTo } from '../lib/moved'
 
 /**
  * A landing page, not a product page. No navigation out, one offer, one action,
@@ -38,6 +39,9 @@ export default function Landing() {
   const [qty, setQty] = useState(1)
   const [open, setOpen] = useState<string | null>(FAQ[0].q)
 
+  // A link sent before the rename still has to work.
+  const moved = movedTo(slug)
+  if (!p && moved) return <Navigate to={`/lp/${moved}`} replace />
   if (!p) return <Navigate to="/404" replace />
   const off = p.compareAtP ? Math.round((1 - p.priceP / p.compareAtP) * 100) : 0
 
